@@ -1,6 +1,6 @@
 import {
-    GET_USERS_SUCCESS
-}from '../types/user.types';
+    GET_WALLETS_SUCCESS
+}from '../types/wallet.types';
 
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 export default function reducer(state = initialState,action){
     switch(action.type){
-        case GET_USERS_SUCCESS:
+        case GET_WALLETS_SUCCESS:
             return {
                 ...state,
                 data:action.payload

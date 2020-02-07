@@ -13,7 +13,6 @@ export const getUsersType = (users) => ({
 })
 
 export function getUsersAction(){
-    console.log(GET_USERS)
     return (dispatch) => {
           httpClient.get(GET_USERS)
             .then(res =>
@@ -21,7 +20,6 @@ export function getUsersAction(){
             )
             .catch(error => {
                 console.log(error)
-                //dispatch(getUsersSuccessError())
             })    
     }
 }

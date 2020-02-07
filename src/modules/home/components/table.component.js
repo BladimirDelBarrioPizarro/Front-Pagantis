@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getUsersAction} from '../actions/user.actions';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon, Menu, Table } from 'semantic-ui-react'
 import User from './user.component';
 
 const TableExamplePadded = () => {
