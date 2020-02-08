@@ -17,7 +17,7 @@ const User = user => {
         <Table.Cell>{department}</Table.Cell>
         <Table.Cell>
           <Link to={`wallets/${id}`}>
-            <Icon onClick={e => {getWallets(id)} } size='big' name='euro sign'/>
+            <Icon onClick={e => {getWallets(id)} } size='big' name='book'/>
           </Link>
         </Table.Cell>
       </Table.Row>
