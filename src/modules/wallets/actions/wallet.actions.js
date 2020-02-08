@@ -12,7 +12,6 @@ export const getWalletByUserIdType = (wallets) => ({
 })
 
 export function getWalletsByUserIdAction(id){
-    console.log(GET_WALLETS+id)
     return (dispatch) => {
           httpClient.get(GET_WALLETS+`${id}`)
             .then(res =>

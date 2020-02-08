@@ -2,7 +2,8 @@ import React from 'react';
 import {useDispatch} from 'react-redux'
 import { Icon, Table } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-import {getWalletsByUserIdAction} from '../../wallets/actions/wallet.actions';
+import {getWalletsByUserIdAction} from '../../wallets/actions/wallet.actions'
+
 const User = user => {
     const {name} = user.user;
     const {department} = user.user

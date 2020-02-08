@@ -1,19 +1,19 @@
-import React, {useEffect} from 'react';
-import {useDispatch,useSelector} from 'react-redux';
-import {getUsersAction} from '../actions/user.actions';
+import React, {useEffect} from 'react'
+import {useDispatch,useSelector} from 'react-redux'
+import {getUsersAction} from '../actions/user.actions'
 import { Icon, Menu, Table } from 'semantic-ui-react'
-import User from './user.component';
+import User from './user.component'
 
 const TableExamplePadded = () => {
 
     const dispatch = useDispatch();
-    const loadUsers = () => dispatch(getUsersAction());
+    const getUsers = () => dispatch(getUsersAction());
     useEffect( () => {
-        loadUsers()
+      getUsers()
     },[]);     
 
     const users = useSelector((state) => state.users.data)
- console.log(users)
+ 
 return(
     <Table celled>
     <Table.Header>

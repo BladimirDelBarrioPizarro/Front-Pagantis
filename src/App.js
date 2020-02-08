@@ -12,6 +12,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/wallets/:id" component={Wallets}></Route>
+          <Route exact path="/wallets/transaction/:id" component={Wallets}></Route>
         </Switch>
     </div>
     </Router>
