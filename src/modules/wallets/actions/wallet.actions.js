@@ -11,7 +11,8 @@ export const getWalletByUserIdType = (wallets) => ({
     payload:wallets
 })
 
-export function getWalletsByUserIdAction(id){
+export function getWalletsByUserIdAction(id,name){
+    localStorage.setItem('userName',name)
     return (dispatch) => {
           httpClient.get(GET_WALLETS+`${id}`)
             .then(res =>
