@@ -1,0 +1,1 @@
+export const GET_WALLETS_BY_NAME = 'GET_WALLETS_BY_NAME';
