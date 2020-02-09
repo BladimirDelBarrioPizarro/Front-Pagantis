@@ -1,13 +1,15 @@
-import React from  'react'
+import React,{useState} from  'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {getWalletsByNameAction} from '../actions/panel.actions';
 import { Select,Container } from 'semantic-ui-react'
 
 
 const Panel = () => {
-     
-const users = useSelector((state) => state.users.data)
 
+const[showWallet,setShowWallet] = useState(false)     
+const[showImport,setShowImport] = useState(false)     
+    
+const users = useSelector((state) => state.users.data)
 
 const optionsUser = users.map((state, index) => ({
   key: state.id[index],
@@ -25,6 +27,7 @@ const handleName = (event) => {
     let name = event.target.textContent;
     console.log(name);
     getWalletsByName(name);
+    setShowWallet(true)
 }
 
 const handleWallet = (event) => {
@@ -34,28 +37,35 @@ const handleWallet = (event) => {
 
 const optionsUserWallets = walletsByName.map((state, index) => ({
     key: state.id[index],
-    text: state.bank,
-    value: state.bank[index]
+    text: state.bank
   }))
     
 
     return(  
         <Container>
-            <h3>Select the user you want to transfer pagacoints to</h3>
               <Select
-                    placeholder='Select User'
+                    placeholder='Select the user you want to transfer pagacoints to'
                     options={optionsNameFilter}
                     onChange={handleName}
+                    button={true}
                     id="name"
               />
-            <h3>Select wallet</h3>  
+            {showWallet ? 
+            <div> 
                 <Select
                     placeholder='Select Wallet'
                     options={optionsUserWallets}
                     onChange={handleWallet}
+                    button={true}
                     id="wallet"
                 />
-             <h3>Select import</h3>  
+            </div>    
+            :''}
+
+            {showImport?
+                <h3>Select import</h3>  
+            :''}
+             
                
         </Container>
     )

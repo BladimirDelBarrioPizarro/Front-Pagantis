@@ -1,6 +1,9 @@
-h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10rem;
+#name{
+    margin-left: 20rem;
+    margin-top: 2rem;
+}
+
+#wallet{
+    margin-left: 20rem;
+    margin-top: 2rem;
 }
