@@ -1,3 +1,7 @@
+.App{
+   margin-left: 20rem;
+}
+
 #name{
     margin-left: 20rem;
     margin-top: 2rem;
@@ -6,4 +10,14 @@
 #wallet{
     margin-left: 20rem;
     margin-top: 2rem;
+}
+
+#import{
+    margin-left: 20rem;
+    margin-top: 2rem;
+}
+
+h4{
+    margin-left: 20rem;
+    margin-top: 2rem;  
 }

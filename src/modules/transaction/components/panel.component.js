@@ -1,7 +1,7 @@
 import React,{useState} from  'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {getWalletsByNameAction} from '../actions/panel.actions';
-import { Select,Container } from 'semantic-ui-react'
+import { Select,Container,Input,Button } from 'semantic-ui-react'
 
 
 const Panel = () => {
@@ -32,6 +32,7 @@ const handleName = (event) => {
 
 const handleWallet = (event) => {
     console.log(event.target.textContent)
+    setShowImport(true)
 }
 
 
@@ -63,7 +64,18 @@ const optionsUserWallets = walletsByName.map((state, index) => ({
             :''}
 
             {showImport?
-                <h3>Select import</h3>  
+            <div>
+                <Input
+                label={{ basic: true, content: '$' }}
+                labelPosition='right'
+                placeholder='Enter pagacoints...'
+                id="import"
+              />
+              <Button
+                content='A button that can be focused'
+                primary
+              />
+            </div>
             :''}
              
                
