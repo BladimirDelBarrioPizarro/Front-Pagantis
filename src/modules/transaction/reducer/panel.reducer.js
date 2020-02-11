@@ -10,7 +10,6 @@ const initialState = {
 export default function reducer(state = initialState,action){
     switch(action.type){
         case GET_WALLETS_BY_NAME:
-            console.log(action.payload)
             return {
                 data:action.payload
             }

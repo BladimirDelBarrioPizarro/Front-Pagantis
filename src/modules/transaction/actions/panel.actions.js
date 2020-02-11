@@ -13,7 +13,6 @@ export const getPanelWalletsType = (wallets) => ({
 })
 
 export function getWalletsByNameAction(name){
-    console.log(GET_WALLETS_NAME+name)
     return (dispatch) => {
           httpClient.get(GET_WALLETS_NAME+name)
             .then(res =>
