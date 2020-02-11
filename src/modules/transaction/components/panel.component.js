@@ -5,7 +5,7 @@ import {postTransactionAction} from '../actions/panel.actions'
 import { Select,Container,Input,Button } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 
-const Panel = ({match}) => {
+const Panel = ({match,history}) => {
 
 const[showWallet,setShowWallet] = useState(false)     
 const[showImport,setShowImport] = useState(false)     
@@ -23,7 +23,7 @@ const optionsNameFilter = optionsUser.filter(item => item.text !== username)
 
 const dispatch = useDispatch();
 const getWalletsByName = (name) => dispatch(getWalletsByNameAction(name));
-const walletsByName = useSelector((state) => state.userWallets.data)
+let walletsByName = useSelector((state) => state.userWallets.data)
 const [bank,setBank] = useState('');
 
 const handleName = (event) => {
@@ -37,29 +37,44 @@ const handleWallet = (event) => {
     setShowImport(true)
 }
 
+if(walletsByName == undefined){
+  walletsByName = []
+}
 
 const optionsUserWallets = walletsByName.map((state, index) => ({
     key: state.id[index],
     text: state.bank
   }))
 
+const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })   
+
+let wallets = useSelector((state) => state.wallets.data)   
 const handleTransaction = () => {
-  let {id} = match.params;  
-  const idWalletTrans = id;
   const walletRecep = walletsByName.filter(wallet => wallet.bank === bank)
-  console.log(walletRecep)
-  const idWalletRecep = walletRecep[0].id;
-  const pagaCointsTrans = walletRecep[0].pagacoint;
+  console.log(wallets)
   let pagacoints = document.getElementById('import').value;
-  console.log("Id receptor "+idWalletRecep)
-  console.log("Id transmisor"+idWalletTrans)
-  console.log("pagaCointsTrans: "+pagaCointsTrans)
-  console.log("pagacoints "+pagacoints)
-  let trans = {
-    idTrans:idWalletTrans,
-    idRecep:idWalletRecep,
-    pagacoint:pagacoints
-  }
+  let {id} = match.params;
+  const idWalletTrans = Number.parseInt(id)
+  const walletTrans = wallets.filter(item => item.id == idWalletTrans)
+  console.log(walletTrans)
+  const pagaCointsTrans = walletTrans[0].pagacoint 
+  const idWalletRecep = walletRecep[0].id;        
+      console.log("Id receptor "+idWalletRecep)
+      console.log("Id transmisor"+id)
+      console.log("pagaCointsTrans: "+pagaCointsTrans)
+      console.log("pagacoints "+pagacoints)
+      let trans = {
+        idTrans:idWalletTrans,
+        idRecep:idWalletRecep,
+        pagacoint:pagacoints
+      }
+
   if(pagaCointsTrans<pagacoints){
     Swal.fire({
       icon: 'error',
@@ -67,17 +82,42 @@ const handleTransaction = () => {
       text: 'You do not have enough paycoints to perform the operation',
       footer: '<b>Transaction Error<b/>'
     })
-    document.getElementById('import').value=''
+    history.push('/') 
   }
   else{
     console.log('Transaccion')
-    const transaction = (trans) => dispatch(postTransactionAction(trans));
-    if(transaction()){
-      
-    }
+    swalWithBootstrapButtons.fire({
+      title: `You are sure to make the transaction for ${pagacoints} pagacoints?`,
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, transaction made!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const transaction = (trans) => dispatch(postTransactionAction(trans));
+        if(transaction(trans)){
+          swalWithBootstrapButtons.fire(
+            'Yes, transaction made!',
+            'your pagacoints have been transferred.',
+            'success'
+          )
+        }
+        history.push('/') 
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your pagacoints is safe :)',
+          'error'
+        )
+      }
+      history.push('/') 
+    }) 
   }
-  
-
+  document.getElementById('import').value = '';
 }    
 
     return(  
@@ -115,9 +155,7 @@ const handleTransaction = () => {
                 onClick={handleTransaction}
               />
             </div>
-            :''}
-             
-               
+            :''}  
         </Container>
     )
 }

@@ -33,6 +33,7 @@ export const postPanelTransType = (resp) => ({
 })
 
 export function postTransactionAction(transaction){
+
     return (dispatch) => {
         httpClient.post(POST_SET_TRANSACTION,transaction)
         .then(res =>
