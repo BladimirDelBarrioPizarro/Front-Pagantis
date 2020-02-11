@@ -1,5 +1,6 @@
 import {
-    GET_WALLETS_BY_NAME
+    GET_WALLETS_BY_NAME,
+    SET_TRANSACTION
 }from '../types/panel.types';
 
 
@@ -13,6 +14,10 @@ export default function reducer(state = initialState,action){
             return {
                 data:action.payload
             }
+        case SET_TRANSACTION:
+            return{
+                transaction:action.payload
+            }    
         default:
             return state;
     }

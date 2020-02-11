@@ -1,6 +1,7 @@
 import React,{useState} from  'react'
 import {useSelector,useDispatch} from 'react-redux'
-import {getWalletsByNameAction} from '../actions/panel.actions';
+import {getWalletsByNameAction} from '../actions/panel.actions'
+import {postTransactionAction} from '../actions/panel.actions'
 import { Select,Container,Input,Button } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 
@@ -23,7 +24,6 @@ const optionsNameFilter = optionsUser.filter(item => item.text !== username)
 const dispatch = useDispatch();
 const getWalletsByName = (name) => dispatch(getWalletsByNameAction(name));
 const walletsByName = useSelector((state) => state.userWallets.data)
-const [walletSelected,setWalletSelected] = useState({});
 const [bank,setBank] = useState('');
 
 const handleName = (event) => {
@@ -55,6 +55,11 @@ const handleTransaction = () => {
   console.log("Id transmisor"+idWalletTrans)
   console.log("pagaCointsTrans: "+pagaCointsTrans)
   console.log("pagacoints "+pagacoints)
+  let trans = {
+    idTrans:idWalletTrans,
+    idRecep:idWalletRecep,
+    pagacoint:pagacoints
+  }
   if(pagaCointsTrans<pagacoints){
     Swal.fire({
       icon: 'error',
@@ -66,6 +71,10 @@ const handleTransaction = () => {
   }
   else{
     console.log('Transaccion')
+    const transaction = (trans) => dispatch(postTransactionAction(trans));
+    if(transaction()){
+      
+    }
   }
   
 
