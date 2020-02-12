@@ -20,7 +20,6 @@ const Wallets = () => {
     <Table.Body >
       {wallets.map((wallet,key) =>
           <Wallet key={key} wallet={wallet}/>
-        
        )}
   </Table.Body>
   </Table>

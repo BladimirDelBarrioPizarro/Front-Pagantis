@@ -7,12 +7,9 @@ const Wallet = wallet => {
     const {id} = wallet.wallet
     const {pagacoint} = wallet.wallet
     const {bank} = wallet.wallet
-    const handlePagacoints = (pagacoint) => {
-        console.log('handleP',pagacoint)
-        localStorage.setItem('pagacoints',pagacoint)
-    }
+     
    return(
-    <Table.Row onClick={handlePagacoints(pagacoint)}>
+    <Table.Row>
     <Table.Cell><Icon name='euro sign' size='big'></Icon>{bank}</Table.Cell>
     <Table.Cell>{pagacoint}</Table.Cell>
     <Table.Cell>

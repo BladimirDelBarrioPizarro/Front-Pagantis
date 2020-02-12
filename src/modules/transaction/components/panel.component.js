@@ -57,18 +57,12 @@ const swalWithBootstrapButtons = Swal.mixin({
 let wallets = useSelector((state) => state.wallets.data)   
 const handleTransaction = () => {
   const walletRecep = walletsByName.filter(wallet => wallet.bank === bank)
-  console.log(wallets)
   let pagacoints = document.getElementById('import').value;
   let {id} = match.params;
   const idWalletTrans = Number.parseInt(id)
   const walletTrans = wallets.filter(item => item.id == idWalletTrans)
-  console.log(walletTrans)
   const pagaCointsTrans = walletTrans[0].pagacoint 
   const idWalletRecep = walletRecep[0].id;        
-      console.log("Id receptor "+idWalletRecep)
-      console.log("Id transmisor"+id)
-      console.log("pagaCointsTrans: "+pagaCointsTrans)
-      console.log("pagacoints "+pagacoints)
       let trans = {
         idTrans:idWalletTrans,
         idRecep:idWalletRecep,
@@ -85,7 +79,6 @@ const handleTransaction = () => {
     history.push('/') 
   }
   else{
-    console.log('Transaccion')
     swalWithBootstrapButtons.fire({
       title: `You are sure to make the transaction for ${pagacoints} pagacoints?`,
       text: "You won't be able to revert this!",
@@ -103,8 +96,7 @@ const handleTransaction = () => {
             'your pagacoints have been transferred.',
             'success'
           )
-        }
-        history.push('/') 
+        } 
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {
